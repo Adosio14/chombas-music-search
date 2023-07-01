@@ -9,13 +9,11 @@
               <p class="card-text">
                 Buscá información de tus canciones favoritas
               </p>
-              <input
-                class="form-control viceInput"
-                type="text"
-                placeholder="Nombre de la canción..."
-                aria-label="default input example"
-              />
-              <button class="viceButton">➨</button>
+              <input class="form-control viceInput" type="text" placeholder="Nombre de la canción..."
+                aria-label="default input example" v-model="userSongName" />
+              <div>
+                <button class="viceButton" @click="redirectToAbout">➨</button>
+              </div>
             </div>
           </div>
         </div>
@@ -28,29 +26,46 @@
 export default {
   name: "HomeView",
   components: {},
-};
-</script>
-<style>
-  @font-face {
-    font-family: "vice";
-    src: url("@/assets/ViceCitySans-ItalicBold.otf");
+  data() {
+    return {
+      userSongName: ''
+    };
+  },
+  methods: {
+    redirectToAbout() {
+      const encodedSongName = encodeURIComponent(this.userSongName);
+      this.$router.push(`/about/${encodedSongName}`);
+    }
+  }
 }
-.title{
+</script>
+
+<style>
+@font-face {
+  font-family: "vice";
+  src: url("@/assets/ViceCitySans-ItalicBold.otf");
+}
+
+.title {
   font-family: "vice";
   font-size: 48px;
   color: #528057;
 }
-.card-text{
-  color:#314d34;
+
+.card-text {
+  color: #314d34;
 }
+
 .card-body {
   padding-left: 48px;
   padding-right: 48px;
 }
+
 .viceInput {
   background-color: rgba(255, 255, 255, 0.5);
   border-color: #fe0252;
 }
+
 .viceButton {
   margin-top: 18px;
   padding-left: 24px;
@@ -64,14 +79,15 @@ export default {
   -webkit-text-stroke-color: black;
   border: none;
 }
+
 .cardOpacity {
-  background-color: rgba(
-    255,
-    255,
-    255,
-    0.6
-  ); /* Cambia el último valor (0.7) para ajustar la opacidad */
+  background-color: rgba(255,
+      255,
+      255,
+      0.6);
+  /* Cambia el último valor (0.7) para ajustar la opacidad */
 }
+
 body {
   background-image: url("https://wallpapercave.com/wp/wp2429567.jpg");
   background-size: fill;
