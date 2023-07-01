@@ -6,15 +6,16 @@
         <div class="list-group-container">
           <div class="list-group m-5 list-group-size">
             <button class="list-group-item list-group-item-action list-group-item" aria-current="true">
-              Music List
+              Resultados
             </button>
             <div class="d-flex justify-content-center" v-if="loading">
               <button type="button" class="list-group-item-action">
                 <div class="spinner-border" style="width: 3rem; height: 3rem;" role=" status"></div>
               </button>
             </div>
-            <button v-for="song in songs" :key="song.id" type="button" class="list-group-item list-group-item-action">
-              {{ song.title }} - {{ song['artist-credit'][0].name }}
+            <button v-for="song in songs" :key="song.id" type="button" class="list-group-item list-group-item-action"
+              @click="getSongId(song.id)">
+              {{ song.title }} | {{ song['artist-credit'][0].name }} | {{ song.length / 1000 }} s.
             </button>
           </div>
         </div>
@@ -58,7 +59,8 @@ export default {
     return {
       songs: [],
       songName: "",
-      loading: true
+      loading: true,
+      songId: ""
     };
   },
   created() {
@@ -78,6 +80,10 @@ export default {
         .catch(error => {
           console.error(error);
         });
+    },
+    getSongId(id) {
+      const selectedSong = this.songs.find(song => song.id === id);
+      this.$router.push(`/song/${selectedSong.id}`);
     }
   }
 }

@@ -25,7 +25,6 @@
 <script>
 export default {
   name: "HomeView",
-  components: {},
   data() {
     return {
       userSongName: ''
@@ -33,8 +32,11 @@ export default {
   },
   methods: {
     redirectToAbout() {
-      const encodedSongName = encodeURIComponent(this.userSongName);
-      this.$router.push(`/about/${encodedSongName}`);
+      const songName = this.userSongName;
+      if (songName === "") {
+        alert("Ingrese una canción para buscar antes de darle al botón");
+      }
+      this.$router.push(`/about/${songName}`);
     }
   }
 }
