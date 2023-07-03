@@ -2,27 +2,46 @@
     <div class="row m-5">
         <div class="col-sm-6 mb-3 mb-sm-0">
             <div class="card">
-                <div class="card-body">
+                <div class="card-header">
                     <h5 class="card-title"><strong>Información de la canción</strong></h5>
-                    <p class="card-text"><strong>Título: </strong>{{ songName }}</p>
-                    <p class="card-text"><strong>Artista: </strong>{{ artistName }}</p>
-                    <p class="card-text"><strong>Duración: </strong>{{ songLength / 1000 }} segundos</p>
-                    <p class="card-text"><strong>Rating: </strong>{{ votesCount }}</p>
+                </div>
+                <div class="card-body">
+                    <div class="d-flex justify-content-center" v-if="loadingSongInfo">
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role=" status"></div>
+                    </div>
+                    <p class="card-text" v-if="!loadingSongInfo"><strong>Título: </strong>{{ songName }}</p>
+                    <p class="card-text" v-if="!loadingSongInfo"><strong>Artista: </strong>{{ artistName }}</p>
+                    <p class="card-text" v-if="!loadingSongInfo"><strong>Duración: </strong>{{ songLength / 1000 }} segundos
+                    </p>
                 </div>
             </div>
         </div>
         <div class="col-sm-6">
             <div class="card">
+                <div class="card-header">
+                    <h5 class="card-title"><strong>Información del artista</strong></h5>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">{{ artistName }}</h5>
-                    <a href="#" class="btn btn-primary" @click="getArtistInfo()" v-if="!loadingInfo">Ver información del
-                        artista</a>
-                    <p class="card-text" v-if="loadingInfo"><strong>País: </strong>{{ countryArtist }}</p>
-                    <p class="card-text" v-if="loadingInfo"><strong>Nacimiento: </strong>{{ begin }}</p>
-                    <p class="card-text" v-if="loadingInfo"><strong>Votos: </strong>{{ value }}</p>
-                    <br />
-                    <br />
-                    <a href="#" class="btn btn-primary" @click="findAlbums">Ver discografía del artista</a>
+                    <div class="artistInfo">
+                        <a href="#" class="btn btn-primary" @click="getArtistInfo()"
+                            v-if="!loadingSongInfo && !loadingInfo">Ver información
+                            del artista</a>
+                        <div class="d-flex justify-content-center" v-if="loadingSongInfo">
+                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role=" status"></div>
+                        </div>
+                        <p class="card-text" v-if="loadingInfo"><strong>País: </strong>{{ countryArtist || "No encontrado"
+                        }}
+                        </p>
+                        <p class="card-text" v-if="loadingInfo"><strong>Ciudad: </strong>{{ cityArtist || "No encontrado" }}
+                        </p>
+                        <p class="card-text" v-if="loadingInfo"><strong>Nacimiento: </strong>{{ begin || "No encontrado" }}
+                        </p>
+                        <p class="card-text" v-if="loadingInfo"><strong>Rating: </strong>{{ value || "No encontrado" }}</p>
+                    </div>
+                    <div>
+                        <a href="#" class="btn btn-primary" @click="findAlbums" v-if="!loadingSongInfo">Ver discografía
+                            del artista ➨</a>
+                    </div>
                 </div>
             </div>
         </div>
@@ -41,7 +60,10 @@ export default {
             votesCount: 0,
             artistId: 0,
             loadingInfo: false,
+            loadingSongInfo: true,
+            loadingArtistInfo: true,
             countryArtist: "",
+            cityArtist: "",
             begin: "",
             value: 0
         };
@@ -60,7 +82,7 @@ export default {
                     this.artistName = response.data['artist-credit'][0].artist.name;
                     this.votesCount = response.data.rating["votes-count"];
                     this.artistId = response.data["artist-credit"][0].artist.id;
-                    console.log(this.artistId)
+                    this.loadingSongInfo = false;
                     console.log(response.data);
                 })
                 .catch(error => {
@@ -73,7 +95,8 @@ export default {
             axios.get(endpoint)
                 .then(response => {
                     this.loadingInfo = true;
-                    this.countryArtist = response.data.country;
+                    this.countryArtist = response.data.area.name;
+                    this.cityArtist = response.data["begin-area"].name;
                     this.begin = response.data["life-span"].begin;
                     this.value = response.data.rating.value;
                     console.log(response.data);
@@ -89,4 +112,20 @@ export default {
     }
 };
 </script>
+<style scoped>
+@font-face {
+    font-family: "vice";
+    src: url("@/assets/ViceCitySans-ItalicBold.otf");
+}
+
+.title {
+    font-size: 48px;
+    font-family: "vice";
+    color: whitesmoke;
+}
+
+.artistInfo {
+    margin-bottom: 20px;
+}
+</style>
   

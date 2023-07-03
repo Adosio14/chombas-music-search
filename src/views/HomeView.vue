@@ -10,7 +10,7 @@
                 Buscá información de tus canciones favoritas
               </p>
               <input class="form-control viceInput" type="text" placeholder="Nombre de la canción..."
-                aria-label="default input example" v-model="userSongName" />
+                aria-label="default input example" v-model="userSongName" @keydown.enter="redirectToAbout" />
               <div>
                 <button class="viceButton" @click="redirectToAbout">➨</button>
               </div>
