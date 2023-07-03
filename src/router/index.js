@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import DiscographyView from '../views/DiscographyView.vue'
 import SongView from "../views/SongView.vue"
 
 const routes = [
@@ -7,6 +8,16 @@ const routes = [
     path: '/',
     name: 'home',
     component: HomeView
+  },
+  {
+    path : '/discography/:id',
+    name: 'discography',
+    component : DiscographyView
+  },
+  {
+    path : '/discography/:id',
+    name: 'discography',
+    component : DiscographyView
   },
   {
     path: '/about/:query',

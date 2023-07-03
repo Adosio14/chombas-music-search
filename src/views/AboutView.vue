@@ -28,6 +28,11 @@
 @import url("https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css");
 @import url('https://fonts.googleapis.com/css2?family=Asset&display=swap');
 
+@font-face {
+  font-family: "vice";
+  src: url("@/assets/ViceCitySans-ItalicBold.otf");
+}
+
 .list-group-item:first-child {
   background-color: rgb(30, 30, 30);
   color: rgb(255, 180, 40);
@@ -46,9 +51,9 @@
 }
 
 .title {
-  font-size: 40px;
-  font-family: Asset, system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-  color: whitesmoke;
+  font-family: "vice";
+  font-size: 48px;
+  color: #528057;
 }
 </style>
 

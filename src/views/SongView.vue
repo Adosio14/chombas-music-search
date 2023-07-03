@@ -1,6 +1,7 @@
 <template>
     <div class="row m-5">
         <div class="col-sm-6 mb-3 mb-sm-0">
+            <h4 class="title">{{ songName }}</h4>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Información de la canción</strong></h5>
@@ -17,6 +18,7 @@
             </div>
         </div>
         <div class="col-sm-6">
+            <h4 class="title">{{ artistName }}</h4>
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Información del artista</strong></h5>
