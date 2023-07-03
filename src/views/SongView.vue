@@ -2,11 +2,11 @@
     <div class="row m-5">
         <div class="col-sm-6 mb-3 mb-sm-0">
             <h4 class="title">{{ songName }}</h4>
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Información de la canción</strong></h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-primary">
                     <div class="d-flex justify-content-center" v-if="loadingSongInfo">
                         <div class="spinner-border" style="width: 3rem; height: 3rem;" role=" status"></div>
                     </div>
@@ -19,13 +19,13 @@
         </div>
         <div class="col-sm-6">
             <h4 class="title">{{ artistName }}</h4>
-            <div class="card">
+            <div class="card border-primary">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Información del artista</strong></h5>
                 </div>
-                <div class="card-body">
+                <div class="card-body text-primary">
                     <div class="artistInfo">
-                        <a href="#" class="btn btn-primary" @click="getArtistInfo()"
+                        <a href="#" class="btn btn-primary colorButton" @click="getArtistInfo()"
                             v-if="!loadingSongInfo && !loadingInfo">Ver información
                             del artista</a>
                         <div class="d-flex justify-content-center" v-if="loadingSongInfo">
@@ -41,7 +41,8 @@
                         <p class="card-text" v-if="loadingInfo"><strong>Rating: </strong>{{ value || "No encontrado" }}</p>
                     </div>
                     <div>
-                        <a href="#" class="btn btn-primary" @click="findAlbums" v-if="!loadingSongInfo">Ver discografía
+                        <a href="#" class="btn btn-primary colorButton" @click="findAlbums" v-if="!loadingSongInfo">Ver
+                            discografía
                             del artista ➨</a>
                     </div>
                 </div>
@@ -128,6 +129,16 @@ export default {
 
 .artistInfo {
     margin-bottom: 20px;
+}
+
+.colorButton {
+    background-color: #c6003e;
+    border: 1px solid #9e0032;
+}
+
+.colorButton:hover {
+    background-color: #a50d3d;
+    border: 1px solid #78072b;
 }
 </style>
   
