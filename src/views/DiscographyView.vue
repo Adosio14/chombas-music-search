@@ -9,21 +9,14 @@
             Por favor esperá mientras reunimos las carátulas de los albumes
           </p>
           <div v-if="!loading" class="row">
-            <div
-              v-for="(album, index) in albums"
-              :key="album.id"
-              class="col-xl-4 col-md-6 col-sm-12"
-              id="albumCard"
-            >
+            <div v-for="(album, index) in albums" :key="album.id" class="col-xl-4 col-md-6 col-sm-12" id="albumCard">
               <div class="card p-2">
                 <div v-if="coverPhotos[index] != undefined" id="caratula">
-                  <img
-                    :src="coverPhotos[index]"
-                    class="card-img-top"
-                    alt="..."
-                  />
+                  <img :src="coverPhotos[index]" class="card-img-top" alt="..." />
                 </div>
-                <div v-else><img src="https://s.pngkit.com/png/small/9-92371_cd-case-template-png-vector-royalty-free-blank.png" class="emptyCase" alt=""></div>
+                <div v-else><img
+                    src="https://s.pngkit.com/png/small/9-92371_cd-case-template-png-vector-royalty-free-blank.png"
+                    class="emptyCase" alt=""></div>
                 <div class="card-body">
                   <h5 class="card-title">{{ album.title }}</h5>
                   <h6 class="card-subtitle mb-2 text-muted">
@@ -47,12 +40,7 @@
               </div>
             </div>
           </div>
-          <div
-            v-else
-            class="spinner-border text-info"
-            id="spinner"
-            role="status"
-          ></div>
+          <div v-else class="spinner-border text-info text-danger" id="spinner" role="status"></div>
         </div>
       </div>
     </div>
@@ -77,8 +65,8 @@ export default {
   },
   methods: {
     async getAlbums() {
-        const artistId = this.$route.params.id
-    this.getArtistName(artistId)
+      const artistId = this.$route.params.id
+      this.getArtistName(artistId)
       this.loading = true;
       let url = `https://musicbrainz.org/ws/2/release?artist=${artistId}&fmt=json&type=album`;
       try {
@@ -105,10 +93,10 @@ export default {
         console.log("Error getting album covers/The album doesn't have a cover photo");
       }
     },
-    async getArtistName(artistId){
-        // let artistId = artistId;
-        const url = `https://musicbrainz.org/ws/2/artist/${artistId}?fmt=json&inc=aliases+tags+ratings`;
-        try {
+    async getArtistName(artistId) {
+      // let artistId = artistId;
+      const url = `https://musicbrainz.org/ws/2/artist/${artistId}?fmt=json&inc=aliases+tags+ratings`;
+      try {
         const response = await axios.get(url);
         this.artistName = response.data.name
       } catch {
@@ -124,31 +112,36 @@ export default {
   font-size: 48px;
   color: #528057;
 }
+
 #caratula {
   margin: 12px;
   overflow: hidden;
   border-bottom-right-radius: 24px;
   border-top-left-radius: 24px;
 }
+
 #caratula img {
-  min-width: 365px; 
-  min-height: 360px; 
-  max-width: 365px; 
-  max-height: 360px; 
+  min-width: 365px;
+  min-height: 360px;
+  max-width: 365px;
+  max-height: 360px;
 }
 
-.emptyCase{
+.emptyCase {
   margin: 12px;
 }
+
 .emptyCase img {
-  min-width: 365px; 
-  min-height: 360px; 
-  max-width: 365px; 
-  max-height: 360px; 
+  min-width: 365px;
+  min-height: 360px;
+  max-width: 365px;
+  max-height: 360px;
 }
+
 .card-text {
   color: #314d34;
 }
+
 #albumCard {
   margin-top: 12px;
 }

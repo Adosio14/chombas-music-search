@@ -1,53 +1,66 @@
 <template>
     <div class="row m-5">
-        <div class="col-sm-6 mb-3 mb-sm-0">
-            <h4 class="title">{{ songName }}</h4>
-            <div class="card border-primary">
+        <!-- <h3>Chombas Music Search</h3> -->
+        <div class="col-sm-6 mb-3 mb-sm-0 d-flex justify-content-center align-items-center">
+            <div class="card border-danger">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Información de la canción</strong></h5>
                 </div>
-                <div class="card-body text-primary">
+                <div class="card-body text-danger d-flex flex-column justify-content-center align-items-center">
                     <div class="d-flex justify-content-center" v-if="loadingSongInfo">
-                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role=" status"></div>
+                        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"></div>
                     </div>
-                    <p class="card-text" v-if="!loadingSongInfo"><strong>Título: </strong>{{ songName }}</p>
-                    <p class="card-text" v-if="!loadingSongInfo"><strong>Artista: </strong>{{ artistName }}</p>
-                    <p class="card-text" v-if="!loadingSongInfo"><strong>Duración: </strong>{{ songLength / 1000 }} segundos
-                    </p>
+                    <div class="row">
+                        <div class="col-12">
+                            <p class="card-text text-center" v-if="!loadingSongInfo"><strong>Título: </strong>{{ songName }}
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="card-text text-center" v-if="!loadingSongInfo"><strong>Artista: </strong>{{ artistName
+                            }}</p>
+                        </div>
+                    </div>
+                    <div class="row mt-4">
+                        <div class="col-12">
+                            <p class="card-text text-center" v-if="!loadingSongInfo"><strong>Duración: </strong>{{
+                                songLength / 1000 }} segundos</p>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-sm-6">
-            <h4 class="title">{{ artistName }}</h4>
-            <div class="card border-primary">
+
+        <div class="col-sm-6 mb-3 mb-sm-0 d-flex justify-content-center align-items-center">
+            <div class="card border-danger">
                 <div class="card-header">
                     <h5 class="card-title"><strong>Información del artista</strong></h5>
                 </div>
-                <div class="card-body text-primary">
+                <div class="card-body text-danger d-flex flex-column justify-content-center align-items-center">
                     <div class="artistInfo">
                         <a href="#" class="btn btn-primary colorButton" @click="getArtistInfo()"
-                            v-if="!loadingSongInfo && !loadingInfo">Ver información
-                            del artista</a>
+                            v-if="!loadingSongInfo && !loadingInfo">Ver información del artista</a>
                         <div class="d-flex justify-content-center" v-if="loadingSongInfo">
-                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role=" status"></div>
+                            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status"></div>
                         </div>
                         <p class="card-text" v-if="loadingInfo"><strong>País: </strong>{{ countryArtist || "No encontrado"
-                        }}
-                        </p>
+                        }}</p>
                         <p class="card-text" v-if="loadingInfo"><strong>Ciudad: </strong>{{ cityArtist || "No encontrado" }}
                         </p>
                         <p class="card-text" v-if="loadingInfo"><strong>Nacimiento: </strong>{{ begin || "No encontrado" }}
                         </p>
                         <p class="card-text" v-if="loadingInfo"><strong>Rating: </strong>{{ value || "No encontrado" }}</p>
                     </div>
-                    <div>
-                        <a href="#" class="btn btn-primary colorButton" @click="findAlbums" v-if="!loadingSongInfo">Ver
-                            discografía
-                            del artista ➨</a>
+                    <div class="mt-3">
+                        <a href="#" class="btn btn-primary text-center colorButton" @click="findAlbums"
+                            v-if="!loadingSongInfo">Ver
+                            discografía del artista ➨</a>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 </template>
   
@@ -132,6 +145,8 @@ export default {
 }
 
 .colorButton {
+    height: 50px;
+    width: 230px;
     background-color: #c6003e;
     border: 1px solid #9e0032;
 }
@@ -139,6 +154,15 @@ export default {
 .colorButton:hover {
     background-color: #a50d3d;
     border: 1px solid #78072b;
+}
+
+.card {
+    height: 400px;
+    width: 600px;
+}
+
+.card-text {
+    font-size: 20px;
 }
 </style>
   
